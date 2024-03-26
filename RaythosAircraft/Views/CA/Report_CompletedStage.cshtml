@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "Completedstage";
+}
+
+@{
+    ViewData["Title"] = "Display Data";
+    string[] TableHeaders = new string[] {"OrderId"
+      ,"Name"
+      ,"Email"
+      ,"Address"
+      ,"ContactNO"
+      ,"AgreementStatus"
+      ,"PurchaseDate"
+      ,"DeliveryDate"
+      ,"Total"
+      ,"Status"
+     };
+
+       Layout = null;
+}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewData["Title"]</title>
+    <!-- Custom fonts for this template-->
+    <link href="~/vendorAdmin/fontawesome-free/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="~/css/sb-admin-2.min.css" rel="stylesheet" />
+    <style>
+        .btn-custom {
+            margin-right: 10px;
+            border-radius: 10px;
+            padding: 10px 20px;
+        }
+        .square-image {
+            width: 100px;
+            height: 100px;
+        }
+        .table-container {
+            max-width: 800px; /* Adjust the maximum width as needed */
+            margin: auto; /* Center the table */
+            overflow-x: auto; /* Enable horizontal scrolling */
+        }
+
+        .table-fixed-header thead {
+            position: sticky;
+            top: 0;
+            background-color: #343a40; /* Adjust background color as needed */
+            color: #ffffff; /* Adjust text color as needed */
+        }
+    </style>
+
+</head>
+<body id="page-top">
+
+
+    <!-- Main Content -->
+    <div id="content">
+                <!-- Topbar Search -->
+                <h1>Completed-Stage Management</h1>
+
+
+
+                <!-- Display the dynamic table -->
+                <div class="table">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                @foreach (var header in TableHeaders)
+                                {
+                                    <th>@header</th>
+                                }
+                       
+                            </tr>
+                        </thead>
+                    
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                foreach (var data in Model)
+                                {
+                                    <tr>
+                                        <td>@data.OrderId</td>
+                                        <td>@data.Name</td>
+                                        <td>@data.Email</td>
+                                        <td>@data.Address</td>
+                                        <td>@data.ContactNo</td>
+                                        <td>@data.AgreementStatus</td>
+                                        <td>@data.PurchaseDate</td>
+                                        <td>@data.DeliveryDate</td>
+                                        <td>@data.Total</td>
+                                        <td>@data.Status</td>
+                                       
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="@TableHeaders.Length">No data available</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/vendorAdmin/jquery/jquery.min.js"></script>
+    <script src="~/vendorAdmin/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Core plugin JavaScript -->
+    <script src="~/vendorAdmin/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages -->
+    <script src="~/js/js/sb-admin-2.min.js"></script>
+</body>
+</html>
+ 
+
+                                                                                                                                                                                                                                                        
+
+
+<script>
+    function printReport() {
+        // Check if the user confirms printing
+        if (window.confirm("Do you want to print this report?")) {
+            window.print();
+        } else {
+            // If printing is canceled, redirect to the CompletedStage action
+            window.location.href = '@Url.Action("CompletedStage", "CA")';
+        }
+    }
+
+    window.onload = function() {
+        printReport();
+    };
+</script>

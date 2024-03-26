@@ -1,0 +1,467 @@
+﻿@model RaythosAircraft.Models.ProductDetailViewModel
+
+@{
+    ViewData["Title"] = "Product Details";
+    Layout = null;
+}
+
+<head>
+    <link href="~/css/ProductView.css" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!-- Template Main CSS File -->
+    <title>Aircraft_Catalog - Index</title>
+
+    <!-- Favicons -->
+    <link href="~/img/favicon.png" rel="icon">
+    <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top ">
+        <div class="container d-flex align-items-center justify-content-lg-between">
+            <h1 class="logo me-auto me-lg-0"><a asp-area="" asp-controller="Home" asp-action="Index">Raythos<span>.</span></a></h1>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <div class="product-details">
+        <!-- Left side: Product Image -->
+        <div class="product-image">
+            @if (Model?.Product?.Img_1 != null)
+            {
+                <img src="~/img/@Model.Product.Img_1" class="product" alt="Product Image">
+            }
+            else
+            {
+                <p>Image not available</p>
+            }
+        </div>
+
+        <!-- Right side: Product Information -->
+        <div class="product-info">
+            @if (Model?.Product != null)
+            {
+                <h2 class="product_title">@Model.Product.ProductCode : @Model.Product.Days ' Days</h2>
+                <br />
+
+                <br />
+                <h2 class="product_title">@Model.Product.Name</h2>
+                <br />
+
+                <br />
+                <p class="pro_details">@Model.Product.Description</p>
+                <br />
+
+                <br />
+                <strong>
+                    <p class="product_price">Rs.@Model.Product.Basic_Price</p>
+                </strong>
+            }
+            else
+            {
+                <p>Product details not available.</p>
+            }
+        </div>
+    </div>
+
+    <br />
+
+    <div class="product-info">
+        @if (Model?.Product != null && !string.IsNullOrEmpty(Model.Product.Specifications))
+
+        {
+            <h2 class="product_title">Specifications: @Model.Product.Specifications</h2>
+        }
+        else
+        {
+            <p>Specifications not available.</p>
+        }
+    </div>
+
+    <br />
+    <hr />
+    <br />
+
+    <h1 style="text-align:center; ">Customize your Product</h1>
+
+    <br /><br />
+
+    <h2 style="text-align:center; ">Customize Engine</h2>
+
+    <br /><br />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ItemCode</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Img_1</th>
+                <th>Price</th>
+                <th>Specifications</th>
+                <th>Description</th>
+                <th>Days</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <tbody>
+                @if (Model != null && Model.RelatedProducts != null)
+                {
+                    foreach (var item in Model.RelatedProducts)
+                    {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ProductCode)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Img_1)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Basic_Price)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Specifications)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Days)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                        <td>
+                            <a asp-action="AddToPurchaseOrder" asp-route-id="@Model.Product.ProductId" asp-route-productIdToAdd="@item.ProductId" asp-fragment="purchase-order-anchor">Add</a>
+                        </td>
+                    </tr>
+                    }
+                }
+                else
+                {
+                <tr>
+                    <td colspan="10">No related products available.</td>
+                </tr>
+                }
+        </tbody>
+    </table>
+
+    <br />
+    <br />
+
+    <h2 style="text-align:center; ">Customize Wings</h2>
+
+    <br /><br />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ItemCode</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Img_1</th>
+                <th>Price</th>
+                <th>Specifications</th>
+                <th>Description</th>
+                <th>Days</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.RelatedProducts != null)
+            {
+                foreach (var item in Model.RelatedProducts)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ProductCode)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Img_1)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Basic_Price)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Specifications)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Days)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                        <td>
+                            <a asp-action="AddToPurchaseOrder" asp-route-id="@Model.Product.ProductId" asp-route-productIdToAdd="@item.ProductId" asp-fragment="purchase-order-anchor">Add</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="10">No related products available.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <br />
+    <br />
+
+    <h2 style="text-align:center; ">Customize Seats</h2>
+
+    <br /><br />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ItemCode</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Img_1</th>
+                <th>Price</th>
+                <th>Specifications</th>
+                <th>Description</th>
+                <th>Days</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.RelatedProducts != null)
+            {
+                foreach (var item in Model.RelatedProducts)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ProductCode)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Img_1)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Basic_Price)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Specifications)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Days)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                        <td>
+                            <a asp-action="AddToPurchaseOrder" asp-route-id="@Model.Product.ProductId" asp-route-productIdToAdd="@item.ProductId" asp-fragment="purchase-order-anchor">Add</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="10">No related products available.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <br />
+    <br />
+
+    <h2 style="text-align:center; ">Customize Color</h2>
+
+    <br /><br />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ItemCode</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Img_1</th>
+                <th>Price</th>
+                <th>Specifications</th>
+                <th>Description</th>
+                <th>Days</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.RelatedProducts != null)
+            {
+                foreach (var item in Model.RelatedProducts)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ProductCode)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Img_1)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Basic_Price)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Specifications)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Days)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                        <td>
+                            <a asp-action="AddToPurchaseOrder" asp-route-id="@Model.Product.ProductId" asp-route-productIdToAdd="@item.ProductId" asp-fragment="purchase-order-anchor">Add</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="10">No related products available.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <br /><br />
+
+    <hr />
+
+    <br /><br />
+
+    <!-- Purchase Order -->
+<div class="purchase-container">
+        <br />
+        <h2>Purchase Order</h2>
+        <br />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>No of Days</th>
+                    <th>Price (Rs.)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Basic Price</td>
+                    <td>
+                        @if (Model.Product != null)
+                        {
+                            @Model.Product.Days
+                        }
+                        else
+                        {
+                            <span>Not available</span>
+                        }
+                    </td>
+                    <td>
+                        @if (Model.Product != null)
+                        {
+                            @Model.Product.Basic_Price
+                        }
+                        else
+                        {
+                            <span>Not available</span>
+                        }
+                    </td>
+                    <td>--</td>
+                </tr>
+                @foreach (var item in Model.PurchaseOrder)
+                {
+                    <tr>
+                        <td>
+                            @if (item != null)
+                            {
+                                @item.Name
+                            }
+                            else
+                            {
+                                <span>Not available</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item != null)
+                            {
+                                @item.Days
+                            }
+                            else
+                            {
+                                <span>Not available</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item != null)
+                            {
+                                @item.Basic_Price
+                            }
+                            else
+                            {
+                                <span>Not available</span>
+                            }
+                        </td>
+                        <td>
+                            @if (Model != null && Model.Product != null && item != null)
+                            {
+                                <a asp-action="DeleteFromPurchaseOrder" asp-route-id="@Model.Product.ProductId" asp-route-productIdToDelete="@item.ProductId" asp-fragment="purchase-order-anchor" class="btn btn-danger">Delete</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+            <tfoot>
+                <tr class="total-row">
+                    <td>Total</td>
+                    <td>
+                        @{
+                            double totalDays = Model.Product?.Days ?? 0;
+                            if (Model.PurchaseOrder != null)
+                            {
+                                totalDays += Model.PurchaseOrder.Sum(p => p.Days);
+                            }
+                        }
+                        @totalDays
+                    </td>
+                    <td>
+                        @{
+                            double total = Model.Product?.Basic_Price ?? 0;
+                            if (Model.PurchaseOrder != null)
+                            {
+                                total += Model.PurchaseOrder.Sum(p => p.Basic_Price);
+                            }
+                        }
+                        @total
+                    </td>
+                    <td>--</td>
+                </tr>
+            </tfoot>
+
+        </table>
+        <br /><br />
+        <hr />
+        <a id="purchase-order-anchor" style="display: none;"></a>
+        @using (Html.BeginForm("OrderSummary", "Products", FormMethod.Post))
+        {
+            <input type="hidden" name="ProductName" value="@Model.Product.Name" />
+            <input type="hidden" name="Total" value="@Model.Total" />
+            <input type="hidden" name="TotalDays" value="@totalDays" />
+            <button type="submit" class="btn btn-primary" style="background-color: #fdbc39;">Proceed to Order Summary</button>
+        }
+
+
+
+    </div>
+
+
+    <br />
+    <br />
+    <hr />
+
+    <script>
+        // Save the scroll position in localStorage before page reload
+        window.onbeforeunload = function() {
+            localStorage.setItem('scrollPosition', window.scrollY || window.pageYOffset);
+        }
+
+        // Scroll to the saved position after page load
+        window.onload = function() {
+            if (localStorage.getItem('scrollPosition')) {
+                window.scrollTo(0, localStorage.getItem('scrollPosition'));
+                localStorage.removeItem('scrollPosition'); // Clear saved position
+            }
+        }
+    </script>
+
+    <br />
+</body>
+
+
+

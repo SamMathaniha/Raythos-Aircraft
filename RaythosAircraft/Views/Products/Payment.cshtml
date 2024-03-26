@@ -1,0 +1,416 @@
+﻿@model RaythosAircraft.Models.ProductDetailViewModel
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Order Summary</title>
+
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!-- Template Main CSS File -->
+    <title>Aircraft_Catalog - Index</title>
+
+    <!-- Favicons -->
+    <link href="~/img/favicon.png" rel="icon">
+    <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Include Bootstrap CSS -->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            background: #e8e5df;
+        }
+
+            body::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.3);
+                z-index: -1;
+            }
+
+
+        /*--------------------------------------------------------------
+                        # Header
+                        --------------------------------------------------------------*/
+        #header {
+            transition: all 0.5s;
+            z-index: 997;
+            padding: 15px 0;
+            background: black;
+            margin-bottom: 300px;
+            height: 90px;
+        }
+
+            #header.header-scrolled,
+            #header.header-inner-pages {
+                background: rgba(0, 0, 0, 0.8);
+            }
+
+            #header .logo {
+                font-size: 32px;
+                margin: 0;
+                padding: 0;
+                line-height: 1;
+                font-weight: 700;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                margin-top: 12px;
+                margin-left: 10px;
+            }
+
+                #header .logo a {
+                    color: #fff;
+                    text-decoration: none;
+                }
+
+                    #header .logo a span {
+                        color: #ffc451;
+                    }
+
+                #header .logo img {
+                    max-height: 40px;
+                }
+
+        /**************** Payment *******************/
+        /* Modal Styles */
+        .modal {
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            display: flex; /* Enable flexbox */
+            align-items: center; /* Vertical center */
+            justify-content: center; /* Horizontal center */
+        }
+
+
+        /* Notification Bar */
+        .sandbox-notice {
+            background-color: #ffffe0; /* Light yellow */
+            color: #333;
+            padding: 10px;
+            text-align: center;
+            font-size: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .modal-content {
+            background-color:;
+            padding: 0; /* Remove padding to allow edge-to-edge design */
+            border-radius: 10px;
+            width: auto;
+            max-width: 400px; /* Adjusted width */
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            margin: auto; /* For center alignment */
+            overflow: hidden; /* Ensures child elements do not overflow the rounded corners */
+        }
+
+        .store-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #007bff; /* Blue background */
+            color: white; /* White text */
+            padding: 20px; /* Padding inside the store-info */
+            margin: 0; /* No margin to ensure it fits edge to edge */
+            position: relative; /* For absolute positioning of children if necessary */
+        }
+
+        .store-info-content {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            width: 100%;
+        }
+
+        .store-logo {
+            flex: 0 0 auto; /* Do not grow or shrink */
+            padding-right: 20px; /* Add some spacing between the logo and the text */
+        }
+
+            .store-logo img {
+                width: 80px; /* Logo width, adjust as necessary */
+                height: 80px; /* Logo height to maintain aspect ratio */
+                border-radius: 50%; /* Circular border */
+                background-color: white; /* Assuming white background for the logo image */
+                padding: 10px; /* Space around the logo */
+            }
+
+        .store-text {
+            flex: 1; /* Take up remaining space */
+            text-align: left; /* Align text to the left */
+        }
+
+            .store-text h2,
+            .store-text p,
+            .store-text h3 {
+                margin: 0 0 5px; /* Adjust margins between text elements */
+            }
+
+
+        /* Add other styles as needed */
+
+
+        /* Input Fields and Payment Details */
+        .payment-details {
+            margin: 20px 0;
+        }
+
+            .payment-details label {
+                display: block;
+                margin-bottom: 5px;
+                color: #333;
+            }
+
+            .payment-details input {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px; /* Space between fields */
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+        /* CTA Button */
+        .pay-button {
+            background-color: #e69500; /* Orange color */
+            color: white !important; /* Ensure text color is white */
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+            .pay-button:hover {
+                background-color: #FF9C00; /* Darker orange */
+                color: white !important; /* Ensure text color remains white on hover */
+            }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Align items vertically in the center */
+            flex-wrap: wrap; /* Allows wrapping if the screen size is too small */
+            margin-bottom: 15px; /* Spacing between each row */
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Aligns items to the start of the column */
+            flex: 1; /* Distributes space equally between columns */
+            margin-right: 20px; /* Adjust the spacing between columns */
+        }
+
+            /* Optional: Style to ensure the form elements are not too wide */
+            .column label,
+            .column input {
+                width: 100%; /* Makes label and input take full width of the column */
+            }
+
+    </style>
+
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+</head>
+
+<body>
+
+    <!-- ======= Header ======= 
+    <header id="header" class="fixed-top ">
+        <div class="container d-flex align-items-center justify-content-lg-between">
+            <h1 class="logo me-auto me-lg-0"><a>Raythos<span>.</span></a></h1>
+        </div>
+    </header>
+     End Header -->
+
+    <!----------------- Payment  ------------------>
+    <div id="paymentModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="sandbox-notice">
+                        Sandbox Notice: Please note that this is a test environment. Payments are not actually processed in this environment, but simulated for testing purposes.
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="store-info">
+                        <div class="store-info-content">
+                            <div class="store-logo">
+                                <img src="~/img/PayHere.png" alt="PayHere Logo" class="payhere-logo">
+                            </div>
+                            
+                            <div class="store-text">
+
+                                    <h2>Roy</h2>
+                                    <p>@ViewBag.UserEmail</p>
+                                    <h3>roy@gmail.com</h3>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-details">
+                        <form asp-controller="Products" asp-action="Payment" method="post" id="order-summary-form">
+                            <div class="form-group">
+                                <label for="cardName">Name on Card</label>
+                                <input type="text" name="cardName" class="form-control id="cardName">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text" name="cardNumber" class="form-control id="cardNumber">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardCVC">CVC</label>
+                                <input type="text" name="cardCVC" class="form-control id="cardCVC">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardExpiry">Expiration Date</label>
+                                <input type="text" name="cardExpiry" class="form-control id=" cardExpiry">
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <input type="hidden" id="paymentStatus" name="paymentStatus" value="Paid" readonly>
+                                </div>
+                                <div class="column">
+                                    <input type="hidden" class="paymentDate" id="paymentDate" name="paymentDate" readonly>
+                                </div>
+                            </div>
+                            <!-- ... other parts of HTML ... -->
+                            <!-- Pay button -->
+                            <button type="submit" class="pay-button">Pay</button>
+
+                            <!-- ... other parts of HTML ... -->
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include jQuery -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#payButton').click(function () {
+                $('#paymentModal').modal('show');
+            });
+
+            $('.close').click(function () {
+                $('#paymentModal').modal('hide');
+            });
+        });
+    </script>
+
+    <script>
+        window.onload = function () {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            today = yyyy + '-' + mm + '-' + dd;
+            document.getElementById('paymentDate').value = today;
+        };
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#order-summary-form").submit(function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: '@Url.Action("Payment", "Products")',
+                    type: 'POST',
+                    data: formData,
+                    success: function (result) {
+                        if (result.success) {
+                            Swal.fire({
+                                title: 'Payment Successful!',
+                                text: 'Your payment has been processed successfully.',
+                                icon: 'success',
+                                confirmButtonText: 'Ok'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = '@Url.Action("Index", "Home")'; // Redirect to client home page
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: result.message,
+                                icon: 'error',
+                                confirmButtonText: 'Ok'
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'An error occurred: ' + error,
+                            icon: 'error',
+                            confirmButtonText: 'Ok'
+                        });
+                    }
+                });
+
+            });
+        });
+    </script>
+
+
+
+</body>
+
+</html>

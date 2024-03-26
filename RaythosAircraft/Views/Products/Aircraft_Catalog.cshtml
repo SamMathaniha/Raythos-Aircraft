@@ -1,0 +1,103 @@
+﻿@model IEnumerable<RaythosAircraft.Models.Products>
+
+@{
+    ViewData["Title"] = "Aircraft_Catalog";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!-- Template Main CSS File -->
+    <link href="~/css/Aircraft_Catalog.css" rel="stylesheet">
+    <title>Aircraft_Catalog - Index</title>
+
+    <!-- Favicons -->
+    <link href="~/img/favicon.png" rel="icon">
+    <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center justify-content-lg-between">
+
+            <h1 class="logo me-auto me-lg-0"><a asp-area="" asp-controller="Home" asp-action="Index">Raythos<span>.</span></a></h1>
+
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                    <li class="dropdown">
+                        <a href="#"><span>Products</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a asp-area="" asp-controller="Products" asp-action="Commercial_aircraft">Commercial aircraft</a></li>
+                            <li><a asp-area="" asp-controller="Products" asp-action="Helicopters">Helicopters</a></li>
+                            <li><a asp-area="" asp-controller="Products" asp-action="Defence">Defence</a></li>
+                            <li><a asp-area="" asp-controller="Products" asp-action="Gliders">Gliders</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <partial name="/Views/Shared/_LoginPartial.cshtml" />
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <div class="CatlogTitle">
+        <p>Aircraft Catalog</p>
+    </div>
+
+    <div class="container mt-100">
+        <div class="row">
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card mb-30">
+                            <div class="card-body text-center">
+                                <h4 class="card-title"> @Html.DisplayFor(modelItem => item.ProductCode) </h4>
+                                <hr />
+                                <img src="~/img/@Html.DisplayFor(modelItem => item.Img_1)">
+                                <hr />
+                                <h4 class="card-title"> @Html.DisplayFor(modelItem => item.Name) </h4>
+                                <p class="text-muted">@Html.DisplayFor(modelItem => item.Description) </p>
+                                <hr />
+                                <p class="text-muted">Specification: @Html.DisplayFor(modelItem => item.Specifications) </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No products found.</p>
+            }
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+

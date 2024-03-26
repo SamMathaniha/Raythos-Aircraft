@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using RaythosAircraft.Areas.Identity.Data
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<head>
+    <link href="~/css/Home.css" rel="stylesheet">
+</head>
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item d-flex align-items-center">
+            <!-- Link for Manage Account -->
+            <a id="manage" class="nav-link mr-3" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" style="margin-right: 20px; color: #fdbc39; font-family: sans-serif; ">
+                Welcome @UserManager.GetUserName(User)!
+            </a>
+
+            <!-- Logout Form Button -->
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="get-started-btn scrollto" style="background-color:#fdbc39;">Logout</button>
+            </form>
+        </li>
+    }
+</ul>
+
+
+
+

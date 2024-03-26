@@ -1,0 +1,443 @@
+﻿@model RaythosAircraft.Models.ProductDetailViewModel
+
+@{
+    Layout = null;
+}
+
+<head>
+    <link href="~/css/ProductView.css" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!-- Template Main CSS File -->
+    <title>Aircraft_Catalog - Index</title>
+
+    <!-- Favicons -->
+    <link href="~/img/favicon.png" rel="icon">
+    <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <style>
+        /*********** Agreement PopUp Model ************/
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content1 {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 5px;
+            max-width: 800px; /* Increased max-width */
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .modal-buttons {
+            margin-top: 30px;
+        }
+
+        .accept-btn, .decline-btn, .close-btn {
+            padding: 15px 30px;
+            margin: 0 20px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .accept-btn {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+        }
+
+        .decline-btn {
+            background-color: #FF5733;
+            color: #fff;
+            border: none;
+        }
+
+        .close-btn {
+            background-color: transparent;
+            border: none;
+            font-size: 1.5em;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        /******** Order Summary **********/
+
+        .container-summary {
+            display: flex;
+            justify-content: space-around;
+            background-color: transparent; /* Set background color to transparent */
+
+            box-shadow: 0 0 20px 0px white;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 100px;
+            margin-top: 100px;
+        }
+
+        .order-summary, .customer-details {
+            padding: 30px;
+            width: 400px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .order-summary {
+            background-color: black;
+        }
+
+        .customer-details {
+            width: 600px;
+        }
+
+        .customer-details:hover {
+            box-shadow: rgba(0, 0, 0, 0.8);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 15px;
+            background-color: #fdbc39;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #828282;
+            }
+
+        .button-confirm {
+            padding: 15px;
+            background-color: #fdbc39;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 550px;
+        }
+
+            .button-confirm:hover {
+                background-color: red;
+            }
+
+        h2 {
+            color: #333;
+        }
+
+        .order-summary h2 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .ordersum {
+            font-weight: 700;
+        }
+
+        .ordersum1 {
+            font-weight: 400;
+        }
+
+        /*    <!--------- Order Summary ---------> */
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Align items vertically in the center */
+            flex-wrap: wrap; /* Allows wrapping if the screen size is too small */
+            margin-bottom: 15px; /* Spacing between each row */
+            width: 600px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Aligns items to the start of the column */
+            flex: 1; /* Distributes space equally between columns */
+            margin-right: 20px; /* Adjust the spacing between columns */
+        }
+
+            /* Optional: Style to ensure the form elements are not too wide */
+            .column label,
+            .column input {
+                width: 100%; /* Makes label and input take full width of the column */
+            }
+
+        /* Style for the submit button */
+        .button-confirm {
+            margin-top: 20px; /* Space above the button */
+            /* Add more styling as needed */
+        }
+
+
+
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top ">
+        <div class="container d-flex align-items-center justify-content-lg-between">
+            <h1 class="logo me-auto me-lg-0"><a asp-area="" asp-controller="Home" asp-action="Index">Raythos<span>.</span></a></h1>
+        </div>
+
+    </header>
+    <!-- End Header -->
+
+    <br />
+    <br />
+
+    <br />
+
+    <!--------- Order Summary --------->
+    <div class="container-summary">
+
+        <div class="customer-details">
+
+            <h2 class="ordersum">Order & Client Summary</h2>
+
+            <div id="success-message" style="display:none; color: green; background-color: seashell; "></div>
+
+
+            @if (Model.Product != null)
+            {
+                <form asp-controller="Products" asp-action="ConfirmDetails" method="post" id="order-summary-form">
+                    <div class="row">
+                        <div class="column">
+                            <label for="productName">Product Name:</label>
+                            <input type="text" id="productName" name="productName" value="@Model.Product.Name" required readonly>
+                        </div>
+                        <div class="column">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <label for="totalCost">Total Cost (Rs.):</label>
+                            <input type="text" id="totalCost" name="Total" value="@Model.Total" required readonly>
+                        </div>
+                        <div class="column">
+                            <label for="address">Address:</label>
+                            <input type="text" id="address" name="address" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <label for="purchaseDate">Purchase Date:</label>
+                            <input type="date" id="purchaseDate" name="PurchaseDate" required>
+                        </div>
+                        <div class="column">
+                            <label for="number">Phone Number:</label>
+                            <input type="tel" id="number" name="number" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <label for="deliveryDate">Delivery Date:</label>
+                            <input type="text" id="deliveryDate" name="DeliveryDate" required readonly>
+                            <p style="color: red; ">Check the Details**</p>
+                        </div>
+                        <div class="column">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" value="@ViewBag.UserEmail" required readonly>
+                            <p style="color: red;">Fill the form**</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <label for="email">Status:</label>
+                            <input type="text" id="status" name="status" value="Placed" required readonly>
+                        </div>
+                        <div class="column">
+                            <label for="AgreementStatus"></label>
+                            <input type="hidden" id="AgreementStatus" name="AgreementStatus" value="Agreed" required readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <button type="submit" class="button-confirm">Confirm Details</button>
+                        </div>
+                    </div>
+                </form>
+
+                <script>
+                    document.getElementById('purchaseDate').addEventListener('change', function () {
+                        var purchaseDate = new Date(this.value);
+                        var totalDays = @Model.TotalDays;  // Use the TotalDays from the model
+                        var deliveryDate = new Date(purchaseDate);
+
+                        deliveryDate.setDate(purchaseDate.getDate() + totalDays);
+
+                        var formattedDeliveryDate = deliveryDate.toISOString().split('T')[0];
+                        document.getElementById('deliveryDate').value = formattedDeliveryDate;
+                    });
+                </script>
+
+            }
+            else
+            {
+                <p>Product information is not available.</p>
+            }
+
+            @if (TempData["msg"] != null)
+            {
+                <script>alert('@TempData["msg"]')</script>
+            }
+
+            <script>
+                $(document).ready(function () {
+                    $("#order-summary-form").submit(function (event) {
+                        event.preventDefault();
+                        var formData = $(this).serialize();
+
+                        $.ajax({
+                            url: '@Url.Action("ConfirmDetails", "Products")',
+                            type: 'POST',
+                            data: formData,
+                            success: function (result) {
+                                if (result.success) {
+                                    $("#success-message").show().text(result.message);
+
+                                    // Set the orderId for the EnterDetails form
+                                    $("#orderId").val(result.orderId);
+
+                                    $("#order-summary-form").trigger("reset");
+                                } else {
+                                    alert("Error: " + result.message);
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                console.error("Error occurred: " + error);
+                            }
+                        });
+                    });
+                });
+            </script>
+        </div>
+
+        <div class="order-summary">
+
+            <h2 class="ordersum">Dear Valued Customer,</h2>
+
+            <h2 class="ordersum1" style="font-size: 14px; text-align: justify; ">Before proceeding to the payment process, please read and confirm your agreement to these terms. Your acknowledgement is crucial in ensuring a smooth and satisfactory transaction. By clicking on the "Accept" button, you agree to adhere to these terms and conditions. If you have any questions or need further clarification, please do not hesitate to contact us.</h2>
+
+            <h2 class="ordersum1" style="font-size: 14px; text-align: justify; ">Thank you for choosing us. We are committed to providing you with the highest level of service and quality.</h2>
+
+            <button id="payButton" type="submit" onclick="showAgreement()" style="width: 300px; align-content: center; margin-top: 450px; margin-left: 20px; " class="button-confirm">Confirm Order</button>
+
+        </div>
+
+    </div>
+
+    <br />
+    <br />
+
+    <!-- The agreement modal -->
+    <div id="agreementModal" class="modal">
+        <div class="modal-content1">
+            <button class="close-btn" onclick="hideAgreement()">&times;</button>
+            <h2 class="modal-title">Agreement</h2>
+            <p>
+
+                The purpose of this letter (this “Letter”) is to confirm in writing our mutual understanding and agreement concerning the implementation of certain modifications to the annual pricing adjustment methodology set forth in Section 4.4, titled Annual Adjustments to Product Prices and Pricing Model, of the Supply Agreement dated August 13, 2000 (the “Supply Agreement”) as well as certain related sections of the “FY01 Calculation and Implementation Statement” dated January 17, 2001 (the “FY01 Implementation Statement”).
+                <br />
+
+                1.	Background. In connection with our on-going discussions concerning Product Prices, we agreed to simplify certain aspects of the annual adjustment to Product Prices as called for under Section 4.4 of the Supply Agreement in order to minimize the administrative time and efforts required by the current method of annually adjusting Product Pricing.
+                <br />
+
+                2.	Annual Changes to Product Prices. Section 4.4 of the Supply Agreement generally describes the process of modifying Product Prices at the end of each Fiscal Year.
+                <br />
+
+                *	Portions of the material in this Exhibit have been redacted pursuant to a request for confidential treatment, and the redacted material has been filed separately with the Securities and Exchange Commission (the “Commission”). A series of asterisks have been placed in the precise places in this Agreement where information has been redacted, and the asterisks are keyed to a legend which states that the material has been omitted pursuant to a request for confidential treatment.
+            </p>
+            <div class="modal-buttons">
+                <button class="accept-btn" onclick="acceptAgreement()">Accept</button>
+                <button class="decline-btn" onclick="declineAgreement()">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript functions to show and hide the agreement modal
+        function showAgreement() {
+            document.getElementById('agreementModal').style.display = 'flex';
+        }
+
+        function hideAgreement() {
+            document.getElementById('agreementModal').style.display = 'none';
+        }
+
+        function acceptAgreement() {
+            // Show confirmation alert
+            var isConfirmed = confirm('Are sure to continue purchase');
+            if (isConfirmed) {
+                // Redirect to Payment page
+                window.location.href = '@Url.Action("Payment", "Products")';
+            }
+            hideAgreement();
+        }
+
+        function declineAgreement() {
+            // Handle the logic when the agreement is declined
+            alert('Agreement Declined!');
+            hideAgreement();
+        }
+    </script>
+
+</body>
+
+
+
